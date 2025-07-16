@@ -5,9 +5,19 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Heart, ExternalLink, Search, Filter, Music } from "lucide-react"
 import { useState } from "react"
+import { useRevealAnimation, useHoverAnimation } from "@/hooks/animations/index.js"
+import { MagicCard } from "@/components/magicui/magic-card"
+import { useTheme } from "@/pages/ThemeProvider"
 
 const Artists = () => {
   const [searchTerm, setSearchTerm] = useState("")
+  const { theme } = useTheme()
+
+  // Apply animations
+  useRevealAnimation(".reveal-item", { stagger: 0.15, duration: 0.8 })
+  useHoverAnimation(".hover-card", { scale: 1.03, shadow: true, duration: 0.3 })
+  useHoverAnimation(".hover-button", { scale: 1.05, glow: true, duration: 0.2 })
+  useHoverAnimation(".artist-avatar", { scale: 1.1, duration: 0.3 })
 
   const artists = [
     {
@@ -78,9 +88,9 @@ const Artists = () => {
   )
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col space-y-4">
+      <div className="reveal-item flex flex-col space-y-4">
         <div>
           <h1 className="text-3xl font-bold">Tus Artistas Favoritos</h1>
           <p className="text-muted-foreground">
@@ -96,10 +106,10 @@ const Artists = () => {
               placeholder="Buscar artistas o géneros..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
+              className="pl-10 hover-card"
             />
           </div>
-          <Button variant="outline" className="shrink-0">
+          <Button variant="outline" className="shrink-0 hover-button">
             <Filter className="mr-2 h-4 w-4" />
             Filtros
           </Button>
@@ -108,88 +118,97 @@ const Artists = () => {
 
       {/* Artists Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredArtists.map((artist) => (
-          <Card key={artist.id} className="hover-scale group overflow-hidden">
-            <CardHeader className="pb-3">
-              <div className="flex items-start justify-between">
-                <Avatar className="h-20 w-20 ring-2 ring-spotify-green/20">
-                  <AvatarImage src={artist.image} alt={artist.name} />
-                  <AvatarFallback className="text-lg font-bold bg-spotify-green text-white">
-                    {artist.name.charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
-                <Button 
-                  size="icon" 
-                  variant="ghost" 
-                  className="opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500/20 hover:text-red-500"
-                >
-                  <Heart className="h-5 w-5" />
-                </Button>
-              </div>
-            </CardHeader>
+        {filteredArtists.map((artist, index) => (
+          <Card key={artist.id} className="reveal-item  group overflow-hidden" style={{ animationDelay: `${index * 0.1}s` }}>
+            <MagicCard 
+            gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
+            className="p-0"
+            gradientFrom="#16A249"
+            gradientTo="#16A249"
+            >
 
-            <CardContent className="space-y-4">
-              <div>
-                <CardTitle className="text-xl mb-1">{artist.name}</CardTitle>
-                <CardDescription className="text-sm">
-                  {artist.description}
-                </CardDescription>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-2 bg-accent rounded-lg">
-                  <div className="text-lg font-bold text-spotify-green">
-                    {artist.plays.toLocaleString()}
-                  </div>
-                  <div className="text-xs text-muted-foreground">Reproducciones</div>
+            
+                <CardHeader className="pb-3">
+                <div className="flex items-start justify-between">
+                    <Avatar className="artist-avatar h-20 w-20 ring-2 ring-spotify-green/20">
+                    <AvatarImage src={artist.image} alt={artist.name} />
+                    <AvatarFallback className="text-lg font-bold bg-spotify-green text-white">
+                        {artist.name.charAt(0)}
+                    </AvatarFallback>
+                    </Avatar>
+                    <Button 
+                    size="icon" 
+                    variant="ghost" 
+                    className="hover-button opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500/20 hover:text-red-500"
+                    >
+                    <Heart className="h-5 w-5" />
+                    </Button>
                 </div>
-                <div className="text-center p-2 bg-accent rounded-lg">
-                  <div className="text-lg font-bold text-spotify-green">
-                    {artist.followers}
-                  </div>
-                  <div className="text-xs text-muted-foreground">Seguidores</div>
+                </CardHeader>
+
+                <CardContent className="space-y-4">
+                <div>
+                    <CardTitle className="text-xl mb-1">{artist.name}</CardTitle>
+                    <CardDescription className="text-sm">
+                    {artist.description}
+                    </CardDescription>
                 </div>
-              </div>
 
-              {/* Genres */}
-              <div className="flex flex-wrap gap-1">
-                {artist.genres.map((genre) => (
-                  <Badge key={genre} variant="secondary" className="text-xs">
-                    {genre}
-                  </Badge>
-                ))}
-              </div>
-
-              {/* Top Song */}
-              <div className="flex items-center space-x-2 p-2 bg-accent/50 rounded-lg">
-                <Music className="h-4 w-4 text-spotify-green" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium">Canción principal</p>
-                  <p className="text-xs text-muted-foreground truncate">
-                    {artist.topSong}
-                  </p>
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-2 bg-accent rounded-lg">
+                    <div className="text-lg font-bold text-spotify-green">
+                        {artist.plays.toLocaleString()}
+                    </div>
+                    <div className="text-xs text-muted-foreground">Reproducciones</div>
+                    </div>
+                    <div className="text-center p-2 bg-accent rounded-lg">
+                    <div className="text-lg font-bold text-spotify-green">
+                        {artist.followers}
+                    </div>
+                    <div className="text-xs text-muted-foreground">Seguidores</div>
+                    </div>
                 </div>
-              </div>
 
-              {/* Actions */}
-              <div className="flex gap-2 pt-2">
-                <Button size="sm" className="flex-1 spotify-gradient text-white">
-                  <Music className="mr-2 h-4 w-4" />
-                  Reproducir
-                </Button>
-                <Button size="sm" variant="outline">
-                  <ExternalLink className="h-4 w-4" />
-                </Button>
-              </div>
-            </CardContent>
+                {/* Genres */}
+                <div className="flex flex-wrap gap-1">
+                    {artist.genres.map((genre) => (
+                    <Badge key={genre} variant="secondary" className="text-xs">
+                        {genre}
+                    </Badge>
+                    ))}
+                </div>
+
+                {/* Top Song */}
+                <div className="flex items-center space-x-2 p-2 bg-accent/50 rounded-lg">
+                    <Music className="h-4 w-4 text-spotify-green" />
+                    <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium">Canción principal</p>
+                    <p className="text-xs text-muted-foreground truncate">
+                        {artist.topSong}
+                    </p>
+                    </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-2 pt-2">
+                    <Button size="sm" className="hover-button flex-1 spotify-gradient text-white">
+                    <Music className="mr-2 h-4 w-4" />
+                    Reproducir
+                    </Button>
+                    <Button size="sm" variant="outline" className="hover-button">
+                    <ExternalLink className="h-4 w-4" />
+                    </Button>
+                </div>
+                </CardContent>
+            </MagicCard>
           </Card>
         ))}
       </div>
 
       {/* Empty State */}
       {filteredArtists.length === 0 && (
-        <div className="text-center py-12">
+        <div className="reveal-item text-center py-12">
           <Music className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-lg font-semibold mb-2">No se encontraron artistas</h3>
           <p className="text-muted-foreground">

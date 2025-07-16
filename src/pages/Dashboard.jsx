@@ -5,8 +5,14 @@ import { Separator } from "@/components/ui/separator"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Progress } from "@/components/ui/progress"
 import { Music, Headphones, Clock, TrendingUp, Heart, Play } from "lucide-react"
+import { useRevealAnimation, useHoverAnimation } from "@/hooks/animations/index.js"
 
 const Dashboard = () => {
+  // Apply animations
+  useRevealAnimation(".reveal-item", { stagger: 0.15 })
+  useHoverAnimation(".hover-card", { scale: 1.02, shadow: true })
+  useHoverAnimation(".artist-item", { scale: 1.05, glow: true })
+
   // Datos de ejemplo
   const stats = {
     totalMinutes: 12540,
@@ -38,10 +44,13 @@ const Dashboard = () => {
   ]
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8">
+      {/* Page Title */}
+      <h1 className="reveal-item text-3xl font-bold text-foreground">Dashboard</h1>
+      
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="hover-scale">
+        <Card className="reveal-item hover-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Minutos Totales</CardTitle>
             <Clock className="h-4 w-4 text-spotify-green" />
@@ -54,7 +63,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        <Card className="hover-scale">
+        <Card className="reveal-item hover-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Canciones</CardTitle>
             <Music className="h-4 w-4 text-spotify-green" />
@@ -67,7 +76,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        <Card className="hover-scale">
+        <Card className="reveal-item hover-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Artistas</CardTitle>
             <Headphones className="h-4 w-4 text-spotify-green" />
@@ -80,7 +89,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        <Card className="hover-scale">
+        <Card className="reveal-item hover-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Género Principal</CardTitle>
             <TrendingUp className="h-4 w-4 text-spotify-green" />
@@ -95,7 +104,7 @@ const Dashboard = () => {
       </div>
 
       {/* Main Content */}
-      <Tabs defaultValue="tracks" className="space-y-6">
+      <Tabs defaultValue="tracks" className="reveal-item space-y-6">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="tracks">Top Canciones</TabsTrigger>
           <TabsTrigger value="artists">Top Artistas</TabsTrigger>
@@ -103,7 +112,7 @@ const Dashboard = () => {
         </TabsList>
 
         <TabsContent value="tracks" className="space-y-6">
-          <Card>
+          <Card className="reveal-item">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Music className="h-5 w-5 text-spotify-green" />
@@ -116,7 +125,7 @@ const Dashboard = () => {
             <CardContent>
               <div className="space-y-4">
                 {topTracks.map((track, index) => (
-                  <div key={track.id} className="flex items-center space-x-4 p-3 rounded-lg hover:bg-accent transition-colors">
+                  <div key={track.id} className="reveal-item hover-card flex items-center space-x-4 p-3 rounded-lg hover:bg-accent transition-colors">
                     <div className="flex items-center justify-center w-8 h-8 bg-spotify-green text-white text-sm font-bold rounded">
                       {index + 1}
                     </div>
@@ -136,7 +145,7 @@ const Dashboard = () => {
         <TabsContent value="artists" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {topArtists.map((artist, index) => (
-              <Card key={artist.id} className="hover-scale">
+              <Card key={artist.id} className="reveal-item hover-card artist-item">
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-4">
                     <div className="relative">
@@ -161,7 +170,7 @@ const Dashboard = () => {
         </TabsContent>
 
         <TabsContent value="recent" className="space-y-6">
-          <Card>
+          <Card className="reveal-item">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Play className="h-5 w-5 text-spotify-green" />
@@ -174,7 +183,7 @@ const Dashboard = () => {
             <CardContent>
               <div className="space-y-4">
                 {recentTracks.map((track) => (
-                  <div key={track.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-accent transition-colors">
+                  <div key={track.id} className="reveal-item hover-card flex items-center justify-between p-3 rounded-lg hover:bg-accent transition-colors">
                     <div className="flex items-center space-x-3">
                       <div className="w-2 h-2 bg-spotify-green rounded-full"></div>
                       <div>
