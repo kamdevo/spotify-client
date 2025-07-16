@@ -3,8 +3,6 @@ import { ThemeToggle } from "@/pages/ThemeToggle"
 import { useSplitTextBlur, useFloatingIcons, ExpandingBgButton } from "@/hooks/animations/index.js"
 import { useTheme } from "./ThemeProvider"
 
-import gradientsImg from "../assets/gradient.png"
-
 const Login = () => {
   const handleSpotifyLogin = () => {
     // Lógica de OAuth con Spotify aquí
@@ -13,7 +11,7 @@ const Login = () => {
   const { theme } = useTheme()
 
   // Aplicar animaciones
-  useSplitTextBlur(".hero-text", { delay: 0.8 })
+  useSplitTextBlur(".main-title", { delay: 0.8 })
   useFloatingIcons(".floating-icon")
 
   return (
@@ -45,12 +43,10 @@ const Login = () => {
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="text-center max-w-3xl mx-auto">
           {/* Hero Text */}
-          <h1 className="hero-text text-5xl md:text-6xl font-bold leading-tight mb-6 relative z-10 bg-clip-text text-transparent" style={{
-            backgroundImage: { gradientsImg },
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}>
-            Cada canción     <br /> cuenta una historia.
+          <h1 className="main-title text-5xl md:text-6xl font-bold leading-tight mb-6 relative z-10">
+            <span className="gradient-text">Cada canción</span>
+            <br />
+            <span className="gradient-text">cuenta una historia.</span>
           </h1>
 
           {/* Login Button - Right below text */}
