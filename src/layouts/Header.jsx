@@ -9,21 +9,21 @@ const Header = () => {
   const navigate = useNavigate()
 
   // Add sophisticated animations
-  useRevealAnimation(".header-item", { stagger: 0.15, duration: 0.6 })
-  useHoverAnimation(".header-button", { 
-    scale: 1.08, 
-    duration: 0.25,
+  useRevealAnimation(".header-item", { stagger: 0.08, duration: 0.3 })
+  useHoverAnimation(".header-button", {
+    scale: 1.08,
+    duration: 0.12,
     shadow: true,
     ease: "power2.out"
   })
   useHoverAnimation(".user-avatar", {
     scale: 1.1,
-    duration: 0.3,
+    duration: 0.15,
     glow: true
   })
   useHoverAnimation(".logout-button", {
     scale: 1.1,
-    duration: 0.2,
+    duration: 0.1,
     rotation: 5
   })
 
@@ -48,7 +48,7 @@ const Header = () => {
           <div className="header-item header-button">
             <ThemeToggle />
           </div>
-          
+
           <div className="header-item flex items-center space-x-3 header-button p-2 rounded-lg">
             <Avatar className="user-avatar">
               <AvatarImage src="https://github.com/shadcn.png" alt="Usuario" />

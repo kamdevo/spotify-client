@@ -134,6 +134,11 @@
   70% { box-shadow: 0 0 0 10px hsl(var(--spotify-green) / 0); }
 }
 
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }

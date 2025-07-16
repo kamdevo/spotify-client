@@ -14,10 +14,10 @@ const Artists = () => {
   const { theme } = useTheme()
 
   // Apply animations
-  useRevealAnimation(".reveal-item", { stagger: 0.15, duration: 0.8 })
-  useHoverAnimation(".hover-card", { scale: 1.03, shadow: true, duration: 0.3 })
-  useHoverAnimation(".hover-button", { scale: 1.05, glow: true, duration: 0.2 })
-  useHoverAnimation(".artist-avatar", { scale: 1.1, duration: 0.3 })
+  useRevealAnimation(".reveal-item", { stagger: 0.08, duration: 0.4 })
+  useHoverAnimation(".hover-card", { scale: 1.03, shadow: true, duration: 0.15 })
+  useHoverAnimation(".hover-button", { scale: 1.05, glow: true, duration: 0.1 })
+  useHoverAnimation(".artist-avatar", { scale: 1.1, duration: 0.15 })
 
   const artists = [
     {
@@ -120,87 +120,87 @@ const Artists = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredArtists.map((artist, index) => (
           <Card key={artist.id} className="reveal-item  group overflow-hidden" style={{ animationDelay: `${index * 0.1}s` }}>
-            <MagicCard 
-            gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
-            className="p-0"
-            gradientFrom="#16A249"
-            gradientTo="#16A249"
+            <MagicCard
+              gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
+              className="p-0"
+              gradientFrom="#16A249"
+              gradientTo="#16A249"
             >
 
-            
-                <CardHeader className="pb-3">
+
+              <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
-                    <Avatar className="artist-avatar h-20 w-20 ring-2 ring-spotify-green/20">
+                  <Avatar className="artist-avatar h-20 w-20 ring-2 ring-spotify-green/20">
                     <AvatarImage src={artist.image} alt={artist.name} />
                     <AvatarFallback className="text-lg font-bold bg-spotify-green text-white">
-                        {artist.name.charAt(0)}
+                      {artist.name.charAt(0)}
                     </AvatarFallback>
-                    </Avatar>
-                    <Button 
-                    size="icon" 
-                    variant="ghost" 
+                  </Avatar>
+                  <Button
+                    size="icon"
+                    variant="ghost"
                     className="hover-button opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500/20 hover:text-red-500"
-                    >
+                  >
                     <Heart className="h-5 w-5" />
-                    </Button>
+                  </Button>
                 </div>
-                </CardHeader>
+              </CardHeader>
 
-                <CardContent className="space-y-4">
+              <CardContent className="space-y-4">
                 <div>
-                    <CardTitle className="text-xl mb-1">{artist.name}</CardTitle>
-                    <CardDescription className="text-sm">
+                  <CardTitle className="text-xl mb-1">{artist.name}</CardTitle>
+                  <CardDescription className="text-sm">
                     {artist.description}
-                    </CardDescription>
+                  </CardDescription>
                 </div>
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-2 bg-accent rounded-lg">
+                  <div className="text-center p-2 bg-accent rounded-lg">
                     <div className="text-lg font-bold text-spotify-green">
-                        {artist.plays.toLocaleString()}
+                      {artist.plays.toLocaleString()}
                     </div>
                     <div className="text-xs text-muted-foreground">Reproducciones</div>
-                    </div>
-                    <div className="text-center p-2 bg-accent rounded-lg">
+                  </div>
+                  <div className="text-center p-2 bg-accent rounded-lg">
                     <div className="text-lg font-bold text-spotify-green">
-                        {artist.followers}
+                      {artist.followers}
                     </div>
                     <div className="text-xs text-muted-foreground">Seguidores</div>
-                    </div>
+                  </div>
                 </div>
 
                 {/* Genres */}
                 <div className="flex flex-wrap gap-1">
-                    {artist.genres.map((genre) => (
+                  {artist.genres.map((genre) => (
                     <Badge key={genre} variant="secondary" className="text-xs">
-                        {genre}
+                      {genre}
                     </Badge>
-                    ))}
+                  ))}
                 </div>
 
                 {/* Top Song */}
                 <div className="flex items-center space-x-2 p-2 bg-accent/50 rounded-lg">
-                    <Music className="h-4 w-4 text-spotify-green" />
-                    <div className="flex-1 min-w-0">
+                  <Music className="h-4 w-4 text-spotify-green" />
+                  <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium">Canción principal</p>
                     <p className="text-xs text-muted-foreground truncate">
-                        {artist.topSong}
+                      {artist.topSong}
                     </p>
-                    </div>
+                  </div>
                 </div>
 
                 {/* Actions */}
                 <div className="flex gap-2 pt-2">
-                    <Button size="sm" className="hover-button flex-1 spotify-gradient text-white">
+                  <Button size="sm" className="hover-button flex-1 spotify-gradient text-white">
                     <Music className="mr-2 h-4 w-4" />
                     Reproducir
-                    </Button>
-                    <Button size="sm" variant="outline" className="hover-button">
+                  </Button>
+                  <Button size="sm" variant="outline" className="hover-button">
                     <ExternalLink className="h-4 w-4" />
-                    </Button>
+                  </Button>
                 </div>
-                </CardContent>
+              </CardContent>
             </MagicCard>
           </Card>
         ))}

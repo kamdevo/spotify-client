@@ -11,16 +11,16 @@ const navigation = [
 
 const Sidebar = () => {
   // Add sophisticated hover animations
-  useRevealAnimation(".sidebar-item", { stagger: 0.1, duration: 0.6 })
-  useHoverAnimation(".nav-item", { 
-    scale: 1.03, 
-    duration: 0.25,
+  useRevealAnimation(".sidebar-item", { stagger: 0.05, duration: 0.3 })
+  useHoverAnimation(".nav-item", {
+    scale: 1.03,
+    duration: 0.12,
     shadow: true,
     ease: "power2.out"
   })
   useHoverAnimation(".logo-container", {
     scale: 1.05,
-    duration: 0.3,
+    duration: 0.15,
     glow: true
   })
 

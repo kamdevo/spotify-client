@@ -64,10 +64,10 @@ const Wrapped = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Elementos decorativos */}
         <div className="absolute top-4 right-20 w-16 h-16 bg-white/10 rounded-full animate-float"></div>
-        <div className="absolute bottom-8 left-20 w-8 h-8 bg-white/20 rounded-full animate-float" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-8 left-20 w-8 h-8 bg-white/20 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
       </div>
 
       {/* Stats principales */}
@@ -125,14 +125,14 @@ const Wrapped = () => {
               <p className="text-muted-foreground mb-2">{wrappedData.topArtist}</p>
               <Badge className="spotify-gradient text-white">247 reproducciones</Badge>
             </div>
-            
+
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-sm">Popularidad</span>
                 <span className="text-sm font-medium">95%</span>
               </div>
               <div className="w-full bg-accent rounded-full h-2">
-                <div className="bg-spotify-green h-2 rounded-full" style={{width: '95%'}}></div>
+                <div className="bg-spotify-green h-2 rounded-full" style={{ width: '95%' }}></div>
               </div>
             </div>
           </CardContent>
@@ -218,8 +218,8 @@ const Wrapped = () => {
           <div className="flex items-end justify-between space-x-2 h-48">
             {monthlyStats.map((stat) => (
               <div key={stat.month} className="flex flex-col items-center space-y-2 flex-1">
-                <div 
-                  className="w-full bg-spotify-green rounded-t-md transition-all duration-500 hover:bg-spotify-green-light"
+                <div
+                  className="w-full bg-spotify-green rounded-t-md transition-all duration-200 hover:bg-spotify-green-light"
                   style={{
                     height: `${(stat.minutes / Math.max(...monthlyStats.map(s => s.minutes))) * 100}%`,
                     minHeight: '20px'

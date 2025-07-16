@@ -7,8 +7,8 @@ gsap.registerPlugin(TextPlugin)
 export const useSplitTextAnimation = (selector, options = {}) => {
   const {
     delay = 0,
-    duration = 0.8,
-    stagger = 0.1,
+    duration = 0.4,
+    stagger = 0.05,
     y = 40,
     blur = 6,
     ease = "power2.out"

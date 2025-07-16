@@ -9,9 +9,9 @@ import { useRevealAnimation, useHoverAnimation } from "@/hooks/animations/index.
 
 const Dashboard = () => {
   // Apply animations
-  useRevealAnimation(".reveal-item", { stagger: 0.15 })
-  useHoverAnimation(".hover-card", { scale: 1.02, shadow: true })
-  useHoverAnimation(".artist-item", { scale: 1.05, glow: true })
+  useRevealAnimation(".reveal-item", { stagger: 0.08, duration: 0.4 })
+  useHoverAnimation(".hover-card", { scale: 1.02, shadow: true, duration: 0.15 })
+  useHoverAnimation(".artist-item", { scale: 1.05, glow: true, duration: 0.12 })
 
   // Datos de ejemplo
   const stats = {
@@ -47,7 +47,7 @@ const Dashboard = () => {
     <div className="space-y-8">
       {/* Page Title */}
       <h1 className="reveal-item text-3xl font-bold text-foreground">Dashboard</h1>
-      
+
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="reveal-item hover-card">

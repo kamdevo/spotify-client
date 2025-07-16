@@ -4,7 +4,7 @@ import { gsap } from "gsap"
 export const useHoverAnimation = (selector, options = {}) => {
   const {
     scale = 1.05,
-    duration = 0.3,
+    duration = 0.15,
     ease = "power2.out",
     glow = false,
     shadow = false,
@@ -14,12 +14,12 @@ export const useHoverAnimation = (selector, options = {}) => {
 
   useGSAP(() => {
     const elements = gsap.utils.toArray(selector)
-    
+
     if (elements.length === 0) return
 
     elements.forEach(element => {
       const hoverTl = gsap.timeline({ paused: true })
-      
+
       hoverTl.to(element, {
         scale,
         rotation,

@@ -4,16 +4,16 @@ import { gsap } from "gsap"
 export const useRevealAnimation = (selector, options = {}) => {
   const {
     delay = 0,
-    duration = 0.8,
+    duration = 0.4,
     y = 20,
-    stagger = 0.1,
+    stagger = 0.05,
     ease = "power2.out",
     ...customOptions
   } = options
 
   useGSAP(() => {
     const elements = gsap.utils.toArray(selector)
-    
+
     if (elements.length === 0) return
 
     // Set initial state
