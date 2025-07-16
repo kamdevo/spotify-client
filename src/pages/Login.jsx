@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button"
 import { Music, BarChart3 } from "lucide-react"
 import { ThemeToggle } from "@/pages/ThemeToggle"
-import { useSplitTextBlur, useFloatingIcons, useHoverAnimation } from "@/hooks/animations/index.js"
+import { useSplitTextBlur, useFloatingIcons, ExpandingBgButton } from "@/hooks/animations/index.js"
 
 const Login = () => {
   const handleSpotifyLogin = () => {
@@ -12,11 +11,6 @@ const Login = () => {
   // Aplicar animaciones
   useSplitTextBlur(".hero-text", { delay: 0.8 })
   useFloatingIcons(".floating-icon")
-  useHoverAnimation(".login-button", { 
-    scale: 1.0, 
-    glow: true, 
-    shadow: true 
-  })
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-spotify-green/20 via-background to-spotify-green/10 flex flex-col">
@@ -33,14 +27,13 @@ const Login = () => {
           </h1>
           
           {/* Login Button - Right below text */}
-          <Button 
+          <ExpandingBgButton 
             onClick={handleSpotifyLogin}
-            className="login-button px-16 py-6 text-xl font-semibold bg-spotify-green hover:bg-spotify-green-light text-white rounded-full shadow-lg transition-all duration-300 mb-6"
-            size="lg"
+            className="px-16 py-6 text-xl font-semibold mb-6 shadow-lg"
           >
             <Music className="mr-4 h-7 w-7" />
             Iniciar sesión con Spotify
-          </Button>
+          </ExpandingBgButton>
           <h4> Descubre la tuya a través de datos únicos y visualizaciones increíbles.</h4>
         </div>
       </div>
